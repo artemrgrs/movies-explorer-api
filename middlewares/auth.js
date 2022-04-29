@@ -16,6 +16,6 @@ module.exports = (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
-    throw new NotAuthError('Проблемы с аутентификацией');
+    throw new NotAuthError('Проблемы с авторизацией');
   }
 };
