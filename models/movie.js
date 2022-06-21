@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -27,19 +26,17 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return validator.isURL(v);
+        return /^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/gi.test(v);
       },
-      message: 'Это не ссылка',
     },
   },
-  trailerLink: {
+  trailer: {
     type: String,
     required: true,
     validate: {
       validator(v) {
-        return validator.isURL(v);
+        return /^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/gi.test(v);
       },
-      message: 'Это не ссылка',
     },
   },
   thumbnail: {
@@ -47,21 +44,19 @@ const movieSchema = new mongoose.Schema({
     required: true,
     validate: {
       validator(v) {
-        return validator.isURL(v);
+        return /^(https?:\/\/)(www\.)?[\w-]+(\.[a-z])+[\w~!@#$%&*()-+=:;\\'",.?/]+#?/gi.test(v);
       },
-      message: 'Это не ссылка',
     },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
+    select: false,
   },
   movieId: {
     type: Number,
-    ref: 'movie',
     required: true,
-    unique: true,
   },
   nameRU: {
     type: String,
